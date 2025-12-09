@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conecta Growth | Agencia Creativa & Digital</title>
+    
+    <!-- Tailwind CSS (Keeping CDN for simplicity in styles) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                black: '#050505',
+                dark: '#0a0a0a',
+                gray: '#171717',
+                blue: '#2563eb',
+                lightBlue: '#60a5fa',
+                white: '#ffffff',
+              }
+            },
+            animation: {
+              'blob': 'blob 10s infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in': 'fadeIn 1s ease-out',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
+            }
+          },
+        },
+      };
+    </script>
+
+    <!-- Styles -->
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+      body {
+        cursor: none;
+        background-color: #050505;
+        background-image: 
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        overflow-x: hidden;
+      }
+      @media (hover: none) {
+        body { cursor: auto; }
+      }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #050505; }
+      ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+      .glass-card {
+        background: rgba(10, 10, 10, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .spotlight-card {
+        position: relative;
+        background: rgba(10, 10, 10, 0.8);
+        overflow: hidden;
+      }
+      .spotlight-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(37, 99, 235, 0.6), transparent 40%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .spotlight-card:hover::before { opacity: 1; }
+
+      .cursor-follower {
+        pointer-events: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 20px; height: 20px;
+        background-color: white;
+        border-radius: 50%;
+        mix-blend-mode: exclusion;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s, background-color 0.3s;
+      }
+      .cursor-follower.hovered {
+        width: 60px; height: 60px;
+        background-color: rgba(37, 99, 235, 0.8);
+        mix-blend-mode: normal;
+        filter: blur(20px);
+      }
+
+      /* Reveal Animations */
+      .reveal-base {
+        opacity: 0;
+        transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity, filter;
+      }
+      .reveal-up { transform: translateY(40px); filter: blur(4px); }
+      .reveal-down { transform: translateY(-40px); filter: blur(4px); }
+      .reveal-left { transform: translateX(40px); filter: blur(4px); }
+      .reveal-right { transform: translateX(-40px); filter: blur(4px); }
+      .reveal-zoom { transform: scale(0.95); filter: blur(4px); }
+      .reveal-active {
+        opacity: 1 !important;
+        transform: translate(0, 0) scale(1) !important;
+        filter: none !important;
+        will-change: auto;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-brand-black text-white antialiased selection:bg-brand-blue selection:text-white">
+    <div id="root"></div>
+    <!-- Main Application Entry Point -->
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
